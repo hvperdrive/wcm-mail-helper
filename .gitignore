@@ -1,0 +1,8 @@
+# Node modules
+node_modules
+
+# Bower components
+bower_components
+
+# Webpack output folder
+public/app

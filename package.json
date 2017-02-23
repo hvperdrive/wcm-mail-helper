@@ -1,0 +1,37 @@
+{
+  "name": "wcm-mail-helper",
+  "version": "1.0.0",
+  "description": "A WCM mail helper for mail rendering and sending.",
+  "main": "src/",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover --dir ./coverage ./node_modules/.bin/_mocha -- -R spec -t 15000 --recursive --slow 2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hvperdrive/wcm-mail-helper.git"
+  },
+  "keywords": [
+    "wcm",
+    "mail"
+  ],
+  "author": "Jeroen Valcke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hvperdrive/wcm-mail-helper/issues"
+  },
+  "homepage": "https://github.com/hvperdrive/wcm-mail-helper#readme",
+  "dependencies": {
+    "lodash": "~4.17.4",
+    "nodemailer": "~3.1.3",
+    "nunjucks": "~3.0.0",
+    "q": "~1.4.1",
+    "rootpath": "~0.1.2",
+    "xoauth2": "~1.2.0"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "istanbul": "~0.4.5",
+    "mocha": "~3.2.0",
+    "mockery": "~2.0.0"
+  }
+}
