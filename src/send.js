@@ -61,17 +61,13 @@ module.exports = function send(mailOptions, senderConfig) {
     }
 
     if (!mailOptions.from) {
-        var email = "";
-
-        if (_.get(senderConfig, "auth.xoauth2.user", false)) {
-            email = " <" + senderConfig.address + ">";
-        } else if (_.get(config, "email.address", false)) {
-            email = " <" + config.email.address + ">";
-        }
+        var email = _.get(senderConfig, "auth.xoauth2.user", false) ||
+            _.get(config, "email.address", false) ||
+            _.get(config, "email.auth.xoauth2.user", "");
 
         mailOptions.from = {
             name: "WCM",
-            address: email || _.get(config, "email.auth.xoauth2.user", "")
+            address: email
         };
     }
 
