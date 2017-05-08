@@ -72,6 +72,8 @@ module.exports = function send(mailOptions, senderConfig) {
         mailOptions.from = mailOptions.from + email;
     }
 
+    console.log(mailOptions);
+
     var transporter = _getTransporter(senderConfig);
 
     if (!transporter) {
