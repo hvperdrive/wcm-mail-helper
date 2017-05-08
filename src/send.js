@@ -60,19 +60,20 @@ module.exports = function send(mailOptions, senderConfig) {
         return Q.reject("No 'to' parameter in the mail options found!");
     }
 
-    if (!mailOptions.noEmailSuffix) {
+    if (!mailOptions.from) {
         var email = "";
 
-        if (senderConfig && senderConfig.address) {
+        if (_.get(senderConfig, "auth.xoauth2.user", false)) {
             email = " <" + senderConfig.address + ">";
-        } else if (config.email && config.email.address) {
+        } else if (_.get(config, "email.address", false)) {
             email = " <" + config.email.address + ">";
         }
 
-        mailOptions.from = mailOptions.from + email;
+        mailOptions.from = {
+            name: "WCM",
+            user: email || _.get(config, "email.auth.xoauth2.user", "")
+        };
     }
-
-    console.log(mailOptions);
 
     var transporter = _getTransporter(senderConfig);
 
