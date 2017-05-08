@@ -71,7 +71,7 @@ module.exports = function send(mailOptions, senderConfig) {
 
         mailOptions.from = {
             name: "WCM",
-            user: email || _.get(config, "email.auth.xoauth2.user", "")
+            address: email || _.get(config, "email.auth.xoauth2.user", "")
         };
     }
 
