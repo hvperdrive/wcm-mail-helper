@@ -45,7 +45,7 @@ var _getTransporter = function _getTransporter(senderConfig) {
     if (!senderConfig && (config && config.email && config.email.smtp)) {
         sConfig = _getSenderConfig(_.cloneDeep(config.email.smtp));
     } else if (senderConfig) {
-        sConfig = _getSenderConfig(senderConfig);
+        sConfig = _getSenderConfig(_.cloneDeep(senderConfig));
     }
 
     if (sConfig) {
