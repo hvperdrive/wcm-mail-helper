@@ -1,6 +1,6 @@
 {
   "name": "wcm-mail-helper",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A WCM mail helper for mail rendering and sending.",
   "main": "src/",
   "scripts": {

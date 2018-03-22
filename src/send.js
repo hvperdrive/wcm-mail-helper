@@ -34,6 +34,8 @@ var _getSenderConfig = function _getSenderConfig(senderConfig) {
         };
 
         config.auth.xoauth2 = xoauth2.createXOAuth2Generator(config.auth.xoauth2);
+    } else {
+        config = Object.assign({}, senderConfig);
     }
 
     return config;
@@ -45,7 +47,7 @@ var _getTransporter = function _getTransporter(senderConfig) {
     if (!senderConfig && (config && config.email && config.email.smtp)) {
         sConfig = _getSenderConfig(_.cloneDeep(config.email.smtp));
     } else if (senderConfig) {
-        sConfig = _getSenderConfig(senderConfig);
+        sConfig = _getSenderConfig(_.cloneDeep(senderConfig));
     }
 
     if (sConfig) {
@@ -60,16 +62,15 @@ module.exports = function send(mailOptions, senderConfig) {
         return Q.reject("No 'to' parameter in the mail options found!");
     }
 
-    if (!mailOptions.noEmailSuffix) {
-        var email = "";
+    if (!mailOptions.from) {
+        var email = _.get(senderConfig, "auth.xoauth2.user", false) ||
+            _.get(config, "email.address", false) ||
+            _.get(config, "email.auth.xoauth2.user", "");
 
-        if (senderConfig && senderConfig.address) {
-            email = " <" + senderConfig.address + ">";
-        } else if (config.email && config.email.address) {
-            email = " <" + config.email.address + ">";
-        }
-
-        mailOptions.from = mailOptions.from + email;
+        mailOptions.from = {
+            name: "WCM",
+            address: email
+        };
     }
 
     var transporter = _getTransporter(senderConfig);
