@@ -34,6 +34,8 @@ var _getSenderConfig = function _getSenderConfig(senderConfig) {
         };
 
         config.auth.xoauth2 = xoauth2.createXOAuth2Generator(config.auth.xoauth2);
+    } else {
+        config = Object.assign({}, senderConfig);
     }
 
     return config;
